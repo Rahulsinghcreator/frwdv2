@@ -7,23 +7,21 @@ from Config import *
 import logging
 
 # Get the root logger
-root_logger = logging.getLogger()
-
-# Increase the size of the log buffer
 logging.basicConfig(
-    format="[%(asctime)s] [%(levelname)s] [%(name)s] : %(message)s",
-    level=logging.ERROR,
-    datefmt="%H:%M:%S",
+    level=logging.DEBUG,
+    format="%(asctime)s - %(levelname)s - %(message)s [%(filename)s:%(lineno)d]",
+    datefmt="%d-%b-%y %H:%M:%S",
+    handlers=[
+        RotatingFileHandler("Assist.txt", maxBytes=50000000, backupCount=10),
+        logging.StreamHandler(),
+    ],
 )
 
-
-random_string = "".join(
-  secrets.choice(string.ascii_letters + string.digits)
-  for _ in range(10)
-)
+logging.getLogger("pyrogram").setLevel(logging.WARNING)
+LOGS = logging.getLogger()
 
 
-app = Client(name=f"{random_string}", api_id=API_ID, api_hash=API_HASH, session_string=STRING)
+app = Client(name="client", api_id=API_ID, api_hash=API_HASH, session_string=STRING)
 
 async def forward_message():
     success = 0
@@ -39,29 +37,37 @@ async def forward_message():
             i = i.replace("https://t.me/", "@").replace(" ", "").strip()
             chat_ids.append(i)
         print(f"Total Chat : {len(chat_ids)}")
-    while True:
-        for i in chat_ids:
-            try:
-                await app.forward_messages(chat_id, channel_username, message_id)
-                success += 1
-            except pyro_errors.FloodWait as e:
-                print(f"You have a floodwait of {int(e.value/60)} Minute & {int(e.value % 60)}.Please Wait Be Patience \nTill Now Group in sended : {success}\nTill Now Fail : {fail}")
-                await asyncio.sleep(int(e.value) + 100)
-            except pyro_errors.Forbidden as e:
-                print(f"Forbidden Error in `{i}`: {e}")
-                continue
-            except pyro_errors.BadRequest as e:
-                print(f"BadRequest Error in `{i}` : {e}")
-                continue
-            except Exception as e:
-                print(f"Error in sending message in {i} due to : {e}")
-                fail += 1
-                continue
-            if int(success + fail) % len(owo) == 0:
-                stime = random.randint(1200, 1500)
-                print(f"Till Now Groups in Sended :  `{success}`\nTill Now Its Fail : `{fail}`\nSleeped For : `{stime}`")
-            else:
-                stime = random.randint(2, 4)
-            time.sleep(stime)  # Add a delay of 1 second between each forward operation
-print("Bot started")
-app.run(forward_message())
+    for i in chat_ids:
+        try:
+            await app.forward_messages(chat_id, channel_username, message_id)
+            success += 1
+        except pyro_errors.FloodWait as e:
+            print(f"You have a floodwait of {int(e.value/60)} Minute & {int(e.value % 60)}.Please Wait Be Patience \nTill Now Group in sended : {success}\nTill Now Fail : {fail}")
+            await asyncio.sleep(int(e.value) + 100)
+        except pyro_errors.Forbidden as e:
+            print(f"Forbidden Error in `{i}`: {e}")
+        except pyro_errors.BadRequest as e:
+            print(f"BadRequest Error in `{i}` : {e}")
+        except Exception as e:
+            print(f"Error in sending message in {i} due to : {e}")
+            fail += 1
+        if int(success + fail) % len(owo) == 0:
+            stime = random.randint(1200, 1500)
+            print(f"Till Now Groups in Sended :  `{success}`\nTill Now Its Fail : `{fail}`\nSleeped For : `{stime}`")
+        else:
+            stime = random.randint(1, 4)
+        await asyncio.sleep(stime) # Add a delay of 1 second between each forward operation
+            
+async def start_bot():
+    await bot.start()
+    await bot.get_me()
+    await bot.send_message(
+        5591734243,
+        f"#START\n\nVersion:- α • 1.1\n\nYour Market Place Bot Has Been Started Successfully",
+    )
+    bot.run(forward_message)
+    await idle()
+
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(start_bot())
