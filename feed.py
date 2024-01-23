@@ -14,7 +14,7 @@ random_string = "".join(
 app = Client(name=f"{random_string}", api_id=API_ID, api_hash=API_HASH, session_string=STRING)
 
 async def forward_message():
-    parts = MSG_LINK.text.split("/")
+    parts = MSG_LINK.split("/")
     channel_username = parts[3]
     message_id = int(parts[4])
     chat_ids = []# Replace with the actual chat IDs you want to forward the message to
@@ -24,6 +24,7 @@ async def forward_message():
         for i in new_content:
             i = i.replace("https://t.me/", "@").replace(" ", "").strip()
             chat_ids.append(i)
+        print(f"Total Chat : {len(chat_ids)}")
     while True:
         for i in chat_ids:
             try:
@@ -47,5 +48,5 @@ async def forward_message():
             else:
                 stime = random.randint(2, 4)
             time.sleep(stime)  # Add a delay of 1 second between each forward operation
-
+print("Bot started")
 app.run(forward_message())
