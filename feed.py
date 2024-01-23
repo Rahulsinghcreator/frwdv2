@@ -25,7 +25,7 @@ LOGS = logging.getLogger()
 
 app = Client(name="client", api_id=API_ID, api_hash=API_HASH, session_string=STRING)
 
-async def forward_message():
+def forward_message():
     success = 0
     fail = 0
     parts = MSG_LINK.split("/")
@@ -66,7 +66,7 @@ async def start_bot():
         lol = await app.get_me()
         #await app.join_chat("@sassyads")
         #await app.send_message(, f"#START\n\nVersion:- α • 1.1\n\nYour Market Place Bot Has Been Started Successfully")
-        await app.run(forward_message())
+        app.run(forward_message())
         await idle()
     except Exception as e:
         print(e)
