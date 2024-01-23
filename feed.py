@@ -10,7 +10,13 @@ import logging
 root_logger = logging.getLogger()
 
 # Increase the size of the log buffer
-root_logger.handlers[0].buffer = 1000000  # Set the buffer size to 1,000,000 bytes
+logging.basicConfig(
+    format="[%(asctime)s] [%(levelname)s] [%(name)s] : %(message)s",
+    level=logging.ERROR,
+    datefmt="%H:%M:%S",
+)
+
+
 random_string = "".join(
   secrets.choice(string.ascii_letters + string.digits)
   for _ in range(10)
