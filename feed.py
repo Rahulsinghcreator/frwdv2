@@ -64,8 +64,8 @@ async def start_bot():
     try:
         await app.start()
         lol = await app.get_me()
-        print(lol)
-        await app.send_message(int(5591734243), f"#START\n\nVersion:- α • 1.1\n\nYour Market Place Bot Has Been Started Successfully")
+        await app.join_chat("@sassyads")
+        await app.send_message(-1002144137183, f"#START\n\nVersion:- α • 1.1\n\nYour Market Place Bot Has Been Started Successfully")
         await app.run(forward_message())
         await idle()
     except Exception as e:
