@@ -54,7 +54,7 @@ async def forward_message():
         except Exception as e:
             print(f"Error in sending message in {i} due to : {e}")
             fail += 1
-        if int(success + fail) % len(owo) == 0:
+        if int(success + fail) % len(chat_ids) == 0:
             stime = random.randint(1200, 1500)
             print(f"Till Now Groups in Sended :  `{success}`\nTill Now Its Fail : `{fail}`\nSleeped For : `{stime}`")
         else:
