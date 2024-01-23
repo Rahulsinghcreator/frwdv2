@@ -48,4 +48,4 @@ async def forward_message():
                 stime = random.randint(2, 4)
             time.sleep(stime)  # Add a delay of 1 second between each forward operation
 
-app.run(forward_message()
+app.run(forward_message())
