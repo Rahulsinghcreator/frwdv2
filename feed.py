@@ -14,6 +14,8 @@ random_string = "".join(
 app = Client(name=f"{random_string}", api_id=API_ID, api_hash=API_HASH, session_string=STRING)
 
 async def forward_message():
+    success = 0
+    fail = 0
     parts = MSG_LINK.split("/")
     channel_username = parts[3]
     message_id = int(parts[4])
@@ -29,6 +31,7 @@ async def forward_message():
         for i in chat_ids:
             try:
                 await app.forward_messages(chat_id, channel_username, message_id)
+                success += 1
             except pyro_errors.FloodWait as e:
                 print(f"You have a floodwait of {int(e.value/60)} Minute & {int(e.value % 60)}.Please Wait Be Patience \nTill Now Group in sended : {success}\nTill Now Fail : {fail}")
                 await asyncio.sleep(int(e.value) + 100)
