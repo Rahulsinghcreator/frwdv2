@@ -1,3 +1,4 @@
+import random
 import asyncio
 from pyrogram import Client
 from pyrogram import errors as pyro_errors
@@ -42,7 +43,7 @@ async def forward_message():
         print(f"Total Chat : {len(chat_ids)}")
     for i in chat_ids:
         try:
-            await app.forward_messages(chat_id, channel_username, message_id)
+            await app.forward_messages(i, channel_username, message_id)
             success += 1
         except pyro_errors.FloodWait as e:
             print(f"You have a floodwait of {int(e.value/60)} Minute & {int(e.value % 60)}.Please Wait Be Patience \nTill Now Group in sended : {success}\nTill Now Fail : {fail}")
