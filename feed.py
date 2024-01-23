@@ -63,8 +63,9 @@ async def forward_message():
 async def start_bot():
     try:
         await app.start()
-        await app.get_me()
-        await app.send_message(5591734243, f"#START\n\nVersion:- α • 1.1\n\nYour Market Place Bot Has Been Started Successfully")
+        lol = await app.get_me()
+        print(lol)
+        await app.send_message(int(5591734243), f"#START\n\nVersion:- α • 1.1\n\nYour Market Place Bot Has Been Started Successfully")
         await app.run(forward_message())
         await idle()
     except Exception as e:
