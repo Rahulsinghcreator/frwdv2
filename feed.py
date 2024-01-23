@@ -14,8 +14,7 @@ random_string = "".join(
 app = Client(name=f"{random_string}", api_id=API_ID, api_hash=API_HASH, session_string=STRING)
 
 async def forward_message():
-    msg_link = "https://t.me/sassysmm/3"
-    parts = msg_link.text.split("/")
+    parts = MSG_LINK.text.split("/")
     channel_username = parts[3]
     message_id = int(parts[4])
     chat_ids = []# Replace with the actual chat IDs you want to forward the message to
@@ -33,10 +32,10 @@ async def forward_message():
                 print(f"You have a floodwait of {int(e.value/60)} Minute & {int(e.value % 60)}.Please Wait Be Patience \nTill Now Group in sended : {success}\nTill Now Fail : {fail}")
                 await asyncio.sleep(int(e.value) + 100)
             except pyro_errors.Forbidden as e:
-                await event.reply(f"Forbidden Error in `{i}`: {e}")
+                print(f"Forbidden Error in `{i}`: {e}")
                 continue
             except pyro_errors.BadRequest as e:
-                await event.reply(f"BadRequest Error in `{i}` : {e}")
+                print(f"BadRequest Error in `{i}` : {e}")
                 continue
             except Exception as e:
                 print(f"Error in sending message in {i} due to : {e}")
