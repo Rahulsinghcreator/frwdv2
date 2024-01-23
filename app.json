@@ -1,0 +1,11 @@
+{
+    "name":"joinlink",
+    "description":"ironams",
+    "repository":"https://github.com/",
+    "env": {
+        "LOL":{
+            "description": "Get your soon",
+            "value":"29292"
+        }
+    }
+}
