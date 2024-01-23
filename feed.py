@@ -25,7 +25,8 @@ LOGS = logging.getLogger()
 
 app = Client(name="client", api_id=API_ID, api_hash=API_HASH, session_string=STRING)
 
-def forward_message():
+async def forward_message():
+    app.start()
     success = 0
     fail = 0
     parts = MSG_LINK.split("/")
@@ -73,4 +74,4 @@ async def start_bot():
 
 
 loop = asyncio.get_event_loop()
-loop.run_until_complete(start_bot())
+loop.run_until_complete(forward_message())
