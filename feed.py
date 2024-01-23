@@ -5,6 +5,7 @@ import secrets
 import string
 from Config import *
 import logging
+from logging.handlers import RotatingFileHandler
 
 # Get the root logger
 logging.basicConfig(
