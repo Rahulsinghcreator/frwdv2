@@ -26,7 +26,7 @@ LOGS = logging.getLogger()
 app = Client(name="client", api_id=API_ID, api_hash=API_HASH, session_string=STRING)
 
 async def forward_message():
-    app.start()
+    await app.start()
     success = 0
     fail = 0
     parts = MSG_LINK.split("/")
@@ -60,7 +60,9 @@ async def forward_message():
         else:
             stime = random.randint(1, 4)
         await asyncio.sleep(stime) # Add a delay of 1 second between each forward operation
-            
+
+
+"""
 async def start_bot():
     try:
         await app.start()
@@ -72,6 +74,7 @@ async def start_bot():
     except Exception as e:
         print(e)
 
+"""
 
 loop = asyncio.get_event_loop()
 loop.run_until_complete(forward_message())
