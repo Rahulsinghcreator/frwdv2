@@ -61,13 +61,13 @@ async def forward_message():
         await asyncio.sleep(stime) # Add a delay of 1 second between each forward operation
             
 async def start_bot():
-    await bot.start()
-    await bot.get_me()
+    await app.start()
+    await app.get_me()
     await bot.send_message(
         5591734243,
         f"#START\n\nVersion:- α • 1.1\n\nYour Market Place Bot Has Been Started Successfully",
     )
-    bot.run(forward_message)
+    app.run(forward_message)
     await idle()
 
 
