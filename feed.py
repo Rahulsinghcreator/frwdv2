@@ -63,7 +63,7 @@ async def forward_message():
 async def start_bot():
     await app.start()
     await app.get_me()
-    await bot.send_message(
+    await app.send_message(
         5591734243,
         f"#START\n\nVersion:- α • 1.1\n\nYour Market Place Bot Has Been Started Successfully",
     )
