@@ -1,3 +1,4 @@
+import asyncio
 from pyrogram import Client
 from pyrogram import errors as pyro_errors
 import time
